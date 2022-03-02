@@ -1,0 +1,16 @@
+{
+  "name" : "com.arxbound.random",
+  "version": "0.1.0",
+  "displayName": "AdvanceRandom",
+  "description": "Seed-based random with different hashers",
+  "unity": "2018.4",
+  "dependencies": {
+    
+  },
+  "keywords": ["tools", "random", "seed"],
+  "author": {
+    "name": "Alexey Potory",
+    "email": "",
+    "url": "https://github.com/potory/"
+  }
+}
