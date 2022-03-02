@@ -30,12 +30,12 @@ namespace AdvanceRandom
         public int Range(int min, int max, uint position)
         {
             var hash = _hasher.GetHash(position, _seed);
-            return min + (int) (hash % (max - min));
+            return min + (int) (hash % (max - min + 1));
         }
         
         public float Range(float min, float max, uint position)
         {
-            return min + _hasher.GetHash(position, _seed) * (max - min) / uint.MaxValue;
+            return min + _hasher.GetHash(position, _seed) * (max - min + 1) / uint.MaxValue;
         }
 
         public float Next(int min, int max)
