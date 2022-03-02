@@ -1,13 +1,13 @@
 ﻿namespace AdvanceRandom.Hashers.Impl
 {
-    public class XxHash : Hasher
+    public static class XxHash
     {
         private const uint Prime1 = 2246822519U;
         private const uint Prime2 = 3266489917U;
         private const uint Prime3 = 668265263U;
         private const uint Prime4 = 374761393U;
 
-        public override uint GetHash(uint position, uint seed)
+        public static uint GetHash(uint position, uint seed)
         {
             var h32 = seed + Prime4;
             h32 += 4U;

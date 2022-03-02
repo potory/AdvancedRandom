@@ -1,8 +1,8 @@
 ﻿namespace AdvanceRandom.Hashers.Impl
 {
-    public class FastHasher : Hasher
+    public static class FastHasher
     {
-        public override uint GetHash(uint position, uint seed)
+        public static uint GetHash(uint position, uint seed)
         {
             const uint bitNoise1 = 0xb5297a4d;
             const uint bitNoise2 = 0x68e31da4;

@@ -1,12 +1,12 @@
 ﻿namespace AdvanceRandom.Hashers.Impl
 {
-    public class MurmurHash : Hasher
+    public static class MurmurHash
     {
         private const uint C1 = 0xcc9e2d51;
         private const uint C2 = 0x1b873593;
 
         // Overload optimized for single int input.
-        public override uint GetHash(uint position, uint seed)
+        public static uint GetHash(uint position, uint seed)
         {
             uint h1 = seed;
             uint k1 = position;

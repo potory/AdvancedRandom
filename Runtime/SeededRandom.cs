@@ -1,4 +1,4 @@
-﻿using AdvanceRandom.Hashers;
+﻿using System;
 using AdvanceRandom.Hashers.Impl;
 using Random = UnityEngine.Random;
 
@@ -6,36 +6,26 @@ namespace AdvanceRandom
 {
     public class SeededRandom
     {
-        private readonly Hasher _hasher;
+        private readonly Func<uint, uint, uint> _hashFunc;
         private readonly uint _seed;
 
         private uint _position;
 
-        public SeededRandom() : this(new FastHasher(), (uint) Random.Range(int.MinValue, int.MaxValue))
+        public SeededRandom(Func<uint, uint, uint> hashFunc = null, uint? seed = null)
         {
-            
-        }
-        
-        public SeededRandom(uint seed) : this(new FastHasher(), seed)
-        {
-            
+            _hashFunc = hashFunc ?? FastHasher.GetHash;
+            _seed = seed ?? (uint) Random.Range(int.MinValue, int.MaxValue);
         }
 
-        public SeededRandom(Hasher hasher, uint seed)
+        public int Range(int minInclusive, int maxExclusive, uint position)
         {
-            _hasher = hasher;
-            _seed = seed;
-        }
-
-        public int Range(int min, int max, uint position)
-        {
-            var hash = _hasher.GetHash(position, _seed);
-            return min + (int) (hash % (max - min + 1));
+            var hash = _hashFunc(position, _seed);
+            return minInclusive + (int) (hash % (maxExclusive - minInclusive));
         }
         
-        public float Range(float min, float max, uint position)
+        public float Range(float minInclusive, float maxExclusive, uint position)
         {
-            return min + _hasher.GetHash(position, _seed) * (max - min + 1) / uint.MaxValue;
+            return minInclusive + _hashFunc(position, _seed) * (maxExclusive - minInclusive) / uint.MaxValue;
         }
 
         public float Next(int min, int max)
